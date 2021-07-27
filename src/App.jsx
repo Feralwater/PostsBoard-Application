@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Posts from './components/posts/Posts';
+import MainPage from './components/mainPage/MainPage';
 
 const App = () => (
   <BrowserRouter>
-    <Route path="/" component={Posts} />
+    <Route path="/" component={MainPage} />
   </BrowserRouter>
 );
 

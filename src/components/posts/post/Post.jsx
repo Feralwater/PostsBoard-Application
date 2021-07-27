@@ -1,13 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../../redusers/postsReduser';
 
-const Post = (props) => {
-  const { post } = props;
+const Post = ({ post }) => {
+  const dispatch = useDispatch();
   return (
-    <div>
+    <li>
       <div>{post.userId}</div>
       <div>{post.title}</div>
       <div>{post.body}</div>
-    </div>
+      <button
+        type="button"
+        onClick={() => dispatch(deletePost(post.id))}
+      >
+        Delete
+      </button>
+    </li>
   );
 };
 

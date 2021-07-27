@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from '../actions/posts';
+import { getPosts } from '../../actions/posts';
 import Post from './post/Post';
 
 const Posts = () => {
@@ -8,12 +8,12 @@ const Posts = () => {
   const posts = useSelector((state) => state.posts.items);
   useEffect(() => {
     dispatch(getPosts());
-  });
+  }, [dispatch]);
 
   return (
-    <div>
-      { posts.map((post) => <Post post={post} />) }
-    </div>
+    <ul>
+      {posts.map((post) => <Post key={post.id} post={post} />)}
+    </ul>
   );
 };
 
