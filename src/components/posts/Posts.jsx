@@ -38,31 +38,34 @@ const Posts = () => {
       <CSSTransition
         in={showMessage}
         timeout={300}
+        className="modal-wrapper"
         classNames="alert"
         unmountOnExit
       >
-        <div className="alert-container">
-          <p className="alert-message">
-            Are you sure you want to delete the message?
-          </p>
-          <div className="buttons-container">
-            <button
-              type="button"
-              onClick={() => setShowMessage(false)}
-              className="cancel-button"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setShowMessage(false);
-                dispatch(deletePost(postId));
-              }}
-              className="danger-button"
-            >
-              Delete
-            </button>
+        <div>
+          <div className="alert-container">
+            <p className="alert-message">
+              Are you sure you want to delete the message?
+            </p>
+            <div className="buttons-container">
+              <button
+                type="button"
+                onClick={() => setShowMessage(false)}
+                className="cancel-button"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowMessage(false);
+                  dispatch(deletePost(postId));
+                }}
+                className="danger-button"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </CSSTransition>
