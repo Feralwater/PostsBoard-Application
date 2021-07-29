@@ -37,7 +37,6 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'no-shadow': 'off',
     'react/no-access-state-in-setstate': 'off',
-    'react/no-danger': 'off',
     'linebreak-style': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
   },

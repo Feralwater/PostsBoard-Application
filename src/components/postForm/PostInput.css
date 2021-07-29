@@ -1,0 +1,86 @@
+.add-button {
+  background-color: #518E7D;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 10px 0 0 0;
+  transition: ease 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-button:after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 300px;
+  margin-left: 60px;
+  background: #fff;
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.7) 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.7) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.7) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b3ffffff', endColorstr='#b3ffffff', GradientType=0);
+  position: absolute;
+  left: -40px;
+  top: -150px;
+  z-index: 1;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  -webkit-animation-name: slideMe;
+  animation-name: slideMe;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-delay: 0.05s;
+  animation-delay: 0.05s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes slideMe {
+  0% {
+    left: -30px;
+    margin-left: 0px;
+  }
+  30% {
+    left: 110%;
+    margin-left: 80px;
+  }
+  100% {
+    left: 110%;
+    margin-left: 80px;
+  }
+}
+
+.input-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-body label {
+  font-size: 28px;
+  color: #518E7D;
+}
+
+.input-body .add-button {
+  align-self: flex-end;
+}
+
+.input-title input,
+.input-body textarea {
+  box-shadow: 0px 0px 12px 3px rgba(81, 142, 125, 0.12);
+}
+
+.input-title label {
+  font-size: 28px;
+  color: #518E7D;
+}
+
+form {
+  border: 1px solid #518E7D;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0px 0px 12px 3px rgba(81, 142, 125, 0.12);
+}

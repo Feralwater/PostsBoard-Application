@@ -1,0 +1,48 @@
+.post-container {
+  background-color: #ffffff;
+  min-height: 110px;
+  margin: 10px 0;
+  box-shadow: 0px 0px 12px 3px rgba(81, 142, 125, 0.12);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.delete-button {
+  background-color: #518E7D;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+}
+
+.delete-button:hover i {
+  color: #518E7D;
+}
+
+.post-item>div {
+  width: 100%;
+  padding: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.post-item span {
+  font-size: 16px;
+  background-color: rgba(81, 142, 125, 1);
+  display: block;
+  padding: 5px 10px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.post-item a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.post-item>div>div {
+  padding: 15px 100px 15px 15px;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+

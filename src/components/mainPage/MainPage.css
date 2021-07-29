@@ -1,0 +1,21 @@
+section{
+  height: 360px;
+  min-height: 360px;
+  background-image: url("../../img/banner-01.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  font-size: 50px;
+  font-weight: bold;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper{
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 15px;
+  min-height: calc(100vh - 430px);
+}
