@@ -5,70 +5,101 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import ReactPaginate from 'react-paginate';
 import { getPosts } from '../../actions/posts';
-import { deletePost } from '../../redusers/postsReduser';
+import { deletePost, setCurrentPage } from '../../redusers/postsReduser';
+import { ReactComponent as PrevArrow } from './svgImages/prevArrow.svg';
+import { ReactComponent as NextArrow } from './svgImages/nextArrow.svg';
+import { ReactComponent as BreakDots } from './svgImages/breakDots.svg';
 import './Posts.css';
+
+function animatedAlert(showMessage, setShowMessage, dispatch, postId) {
+  return (
+    <CSSTransition
+      in={showMessage}
+      timeout={300}
+      className="modal-wrapper"
+      classNames="alert"
+      unmountOnExit
+    >
+      <div>
+        <div className="alert-container">
+          <p className="alert-message">
+            Are you sure you want to delete the message?
+          </p>
+          <div className="buttons-container">
+            <button
+              type="button"
+              onClick={() => setShowMessage(false)}
+              className="cancel-button"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowMessage(false);
+                dispatch(deletePost(postId));
+              }}
+              className="danger-button"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </CSSTransition>
+  );
+}
+
+function pagination(pagesCount, handlePageClick) {
+  return (
+    <div className="pagination-wrapper">
+      <ReactPaginate
+        previousLabel={(
+          <PrevArrow className="previous" />
+      )}
+        nextLabel={(
+          <NextArrow className="next" />
+      )}
+        breakLabel={(
+          <BreakDots className="break" />
+      )}
+        pageCount={pagesCount}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={2}
+        onPageChange={handlePageClick}
+        containerClassName="pagination"
+        pageClassName="pages"
+        activeClassName="active"
+      />
+    </div>
+  );
+}
 
 const Posts = () => {
   initializeIcons();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.items);
-  // const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector((state) => state.posts.currentPage);
+  const limit = useSelector((state) => state.posts.limit);
   const [showMessage, setShowMessage] = useState(false);
   const [postId, setPostId] = useState('');
+  const totalCount = useSelector((state) => state.posts.totalCount);
+  const pagesCount = Math.ceil(totalCount / limit);
+
+  const handlePageClick = (currentPage) => {
+    dispatch(getPosts(currentPage.selected + 1));
+    dispatch(setCurrentPage(currentPage.selected + 1));
+  };
 
   useEffect(() => {
-    dispatch(getPosts());
-    // setCurrentPage((prevState) => prevState + 1);
-  }, [dispatch]);
-  const scrollHandler = (event) => {
-    if (event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 100) {
-      console.log('');
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-    return function () {
-      document.removeEventListener('scroll', scrollHandler);
-    };
-  }, []);
+    dispatch(getPosts(currentPage, limit));
+  }, [dispatch, currentPage, limit]);
 
   return (
     <>
-      <CSSTransition
-        in={showMessage}
-        timeout={300}
-        className="modal-wrapper"
-        classNames="alert"
-        unmountOnExit
-      >
-        <div>
-          <div className="alert-container">
-            <p className="alert-message">
-              Are you sure you want to delete the message?
-            </p>
-            <div className="buttons-container">
-              <button
-                type="button"
-                onClick={() => setShowMessage(false)}
-                className="cancel-button"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowMessage(false);
-                  dispatch(deletePost(postId));
-                }}
-                className="danger-button"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </CSSTransition>
+      {animatedAlert(showMessage, setShowMessage, dispatch, postId)}
       {posts.map((post) => (
         <div className="post-container" key={post.id}>
           <ActivityItem
@@ -94,6 +125,7 @@ const Posts = () => {
           />
         </div>
       ))}
+      {pagination(pagesCount, handlePageClick)}
     </>
   );
 };

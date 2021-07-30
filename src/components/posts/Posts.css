@@ -115,3 +115,47 @@
   background-color: #d21638;
   color: #ffffff;
 }
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding-inline-start: 0;
+  line-height: 23px;
+  margin-right: 19px;
+}
+
+.previous {
+  margin-right: 9px;
+  cursor: pointer;
+}
+
+.break {
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.next {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.pages {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.active {
+  padding: 2px 6px;
+  background: #518E7D;
+  border-radius: 3px;
+  color: #FFFFFF;
+}
