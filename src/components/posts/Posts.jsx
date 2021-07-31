@@ -6,8 +6,9 @@ import { DefaultButton } from '@fluentui/react/lib/Button';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import ReactPaginate from 'react-paginate';
+import { useHistory } from 'react-router';
 import { getPosts } from '../../actions/posts';
-import { deletePost, setCurrentPage } from '../../redusers/postsReduser';
+import { deletePost } from '../../redusers/postsReduser';
 import { ReactComponent as PrevArrow } from './svgImages/prevArrow.svg';
 import { ReactComponent as NextArrow } from './svgImages/nextArrow.svg';
 import { ReactComponent as BreakDots } from './svgImages/breakDots.svg';
@@ -52,50 +53,50 @@ function animatedAlert(showMessage, setShowMessage, dispatch, postId) {
   );
 }
 
-function pagination(pagesCount, handlePageClick) {
+function pagination(pagesCount, handlePageClick, pageNumber) {
   return (
     <div className="pagination-wrapper">
       <ReactPaginate
         previousLabel={(
           <PrevArrow className="previous" />
-      )}
+        )}
         nextLabel={(
           <NextArrow className="next" />
-      )}
+        )}
         breakLabel={(
           <BreakDots className="break" />
-      )}
+        )}
         pageCount={pagesCount}
-        marginPagesDisplayed={1}
+        marginPagesDisplayed={2}
         pageRangeDisplayed={2}
         onPageChange={handlePageClick}
         containerClassName="pagination"
         pageClassName="pages"
         activeClassName="active"
+        initialPage={pageNumber - 1}
+        disableInitialCallback
       />
     </div>
   );
 }
 
-const Posts = () => {
+const Posts = ({ match: { params: { pageNumber = 1 } } }) => {
+  const history = useHistory();
   initializeIcons();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.items);
-  const currentPage = useSelector((state) => state.posts.currentPage);
-  const limit = useSelector((state) => state.posts.limit);
   const [showMessage, setShowMessage] = useState(false);
   const [postId, setPostId] = useState('');
   const totalCount = useSelector((state) => state.posts.totalCount);
-  const pagesCount = Math.ceil(totalCount / limit);
+  const pagesCount = Math.ceil(totalCount / 10);
 
   const handlePageClick = (currentPage) => {
-    dispatch(getPosts(currentPage.selected + 1));
-    dispatch(setCurrentPage(currentPage.selected + 1));
+    history.push(`/page/${currentPage.selected + 1}`);
   };
 
   useEffect(() => {
-    dispatch(getPosts(currentPage, limit));
-  }, [dispatch, currentPage, limit]);
+    dispatch(getPosts(pageNumber));
+  }, [dispatch, pageNumber]);
 
   return (
     <>
@@ -125,7 +126,7 @@ const Posts = () => {
           />
         </div>
       ))}
-      {pagination(pagesCount, handlePageClick)}
+      {pagination(pagesCount, handlePageClick, +pageNumber)}
     </>
   );
 };

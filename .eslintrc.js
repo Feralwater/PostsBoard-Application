@@ -24,7 +24,10 @@ module.exports = {
   },
   rules: {
     'no-new-wrappers': 'error',
-    'no-use-before-define': ['error', { functions: false, classes: false }],
+    'no-use-before-define': ['error', {
+      functions: false,
+      classes: false,
+    }],
     'react/prefer-stateless-function': 'off',
     'no-plusplus': 'off',
     'max-len': 'off',
