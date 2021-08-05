@@ -42,5 +42,6 @@ module.exports = {
     'react/no-access-state-in-setstate': 'off',
     'linebreak-style': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
 };

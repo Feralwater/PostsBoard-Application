@@ -8,11 +8,11 @@ import { CSSTransition } from 'react-transition-group';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router';
 import { getPosts } from '../../actions/posts';
-import { deletePost } from '../../redusers/postsReduser';
 import { ReactComponent as PrevArrow } from './svgImages/prevArrow.svg';
 import { ReactComponent as NextArrow } from './svgImages/nextArrow.svg';
 import { ReactComponent as BreakDots } from './svgImages/breakDots.svg';
 import './Posts.css';
+import { deletePost } from '../../redusers/postsReduser';
 
 function animatedAlert(showMessage, setShowMessage, dispatch, postId) {
   return (
@@ -96,7 +96,7 @@ const Posts = ({ match: { params: { pageNumber = 1 } } }) => {
 
   useEffect(() => {
     dispatch(getPosts(pageNumber));
-  }, [dispatch, pageNumber]);
+  }, [pageNumber]);
 
   return (
     <>

@@ -1,10 +1,5 @@
-import axios from 'axios';
-import { render, screen, waitFor } from '@testing-library/react';
-import React from 'react';
 import postsReducer, { setPosts } from './postsReduser';
-import Posts from '../components/posts/Posts';
 
-jest.mock('axios');
 const items = [
   {
     userId: 1,
@@ -35,12 +30,6 @@ it('posts should be set', () => {
   const newState = postsReducer(defaultState, action);
 
   // 3. expectation
-  expect(newState.items.length).toBe(3);
-});
-
-test('it displays a list of posts', async () => {
-  axios.get.mockResolvedValue({ data: items });
-  render(<Posts />);
-  const newState = await waitFor(() => screen.getByTestId('root'));
-  expect(newState).toBeInTheDocument();
+  expect(newState.items.length)
+    .toBe(3);
 });

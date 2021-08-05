@@ -45,5 +45,4 @@ export default function postsReducer(state = defaultState, action) {
 export const setPosts = (items) => ({ type: SET_POSTS, payload: items });
 export const addPost = (item) => ({ type: ADD_POST, payload: item });
 export const deletePost = (itemId) => ({ type: DELETE_POST, payload: itemId });
-// export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, payload: currentPage });
 export const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, payload: totalCount });
