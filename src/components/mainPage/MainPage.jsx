@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 
 const MainPage = ({ match }) => (
   <>
-    <section>Welcome to our posts board! Share with us whatever you want!</section>
+    <section>Share with us whatever you want!</section>
     <div className="wrapper">
       <PostInput />
       <Posts match={match} />
